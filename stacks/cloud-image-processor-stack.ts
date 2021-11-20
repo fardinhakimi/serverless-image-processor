@@ -52,6 +52,7 @@ export class CloudImageProcessorStack extends cdk.Stack {
 
     imageProcessorFunction.addToRolePolicy(
       new iam.PolicyStatement({
+        resources: ["*"],
         actions: [
           'rekognition:DetectFaces'
         ]
