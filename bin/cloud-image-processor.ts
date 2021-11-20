@@ -1,21 +1,23 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { CloudImageProcessorStack } from '../lib/cloud-image-processor-stack';
+import { CloudImageProcessorStack } from '../stacks/cloud-image-processor-stack';
+
+
+if(!process.env.CDK_DEPLOY_ACCOUNT){
+  throw new Error('CDK_DEPLOY_ACCOUNT env var must be set')
+}
+
+
+const env = {
+  account: process.env.CDK_DEPLOY_ACCOUNT,
+  region: process.env.CDK_DEPLOY_REGION || 'eu-west-1'
+}
+
+const stage = process.env.CDK_DEPLOY_STAGE || 'dev'
 
 const app = new cdk.App();
 new CloudImageProcessorStack(app, 'CloudImageProcessorStack', {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
-
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
-
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
-
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+  env,
+  stage
 });

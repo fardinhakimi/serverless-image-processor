@@ -1,7 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 
 export class CloudImageProcessorStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.Construct, id: string, props: cdk.StackProps & { stage: string }) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
