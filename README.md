@@ -11,7 +11,7 @@ This program is developed on top of:
 * [NodeJs](https://nodejs.org/en/)
 * [Typescript](https://www.typescriptlang.org/)
 * [AWS CDK](https://aws.amazon.com/cdk/)
-* AWS services ( Lambda, SNS, SQS, Api gateway, Dynamodb, secrets manager)
+* AWS services ( Lambda, S3, Dynamodb, Rekognition)
 
 ### Installation
 1. Install [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on your machine
