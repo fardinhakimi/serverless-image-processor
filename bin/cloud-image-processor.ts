@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
-import { CloudImageProcessorStack } from '../stacks/cloud-image-processor-stack';
+import 'source-map-support/register'
+import * as cdk from '@aws-cdk/core'
+import { CloudImageProcessorStack } from '../stacks/cloud-image-processor-stack'
 
 
 if(!process.env.CDK_DEPLOY_ACCOUNT){
@@ -16,8 +16,9 @@ const env = {
 
 const stage = process.env.CDK_DEPLOY_STAGE || 'dev'
 
-const app = new cdk.App();
+const app = new cdk.App()
+
 new CloudImageProcessorStack(app, 'CloudImageProcessorStack', {
   env,
   stage
-});
+})
