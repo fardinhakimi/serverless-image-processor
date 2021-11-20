@@ -3,7 +3,9 @@ import * as AWS from 'aws-sdk'
 import { S3EventRecord } from 'aws-lambda'
 
 const documentClient = new AWS.DynamoDB.DocumentClient()
-const rekognitionClient = new AWS.Rekognition()
+const rekognitionClient = new AWS.Rekognition({
+    region: process.env.REGION
+})
 
 type AnalyzedObjectResult = {
     object: string
@@ -16,6 +18,9 @@ type AnalyzedObjectResult = {
 export const analyzeImage = async (s3EventRecord: S3EventRecord): Promise<AnalyzedObjectResult>  => {
 
 
+    console.log(' Analyzing object ', s3EventRecord.s3.object.key)
+
+
     const response = await rekognitionClient.detectFaces({
         Image: {
             S3Object: {
@@ -24,6 +29,9 @@ export const analyzeImage = async (s3EventRecord: S3EventRecord): Promise<Analyz
             }
         }
     }).promise()
+
+    console.log(' Rekognition response ')
+    console.log(JSON.stringify(response, null, 4))
 
     const faces = response.FaceDetails?.map( item => item.Gender) ?? []
 
@@ -44,6 +52,9 @@ export const saveImageStats = async (analyzedObjectResult: AnalyzedObjectResult)
     }
 
     const { object, ...rest } = analyzedObjectResult
+
+    console.log('Saving stats to stats-table')
+    console.log(analyzedObjectResult)
 
     return await documentClient.put({
         TableName: process.env.IMAGE_STATS_TABLE,

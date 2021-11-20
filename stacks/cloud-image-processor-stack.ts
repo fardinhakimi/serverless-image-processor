@@ -44,9 +44,12 @@ export class CloudImageProcessorStack extends cdk.Stack {
       entry: join(functionsPath, 'imageProcessor/index.ts'),
       handler: 'imageProcessor',
       environment: {
-        IMAGE_STATS_TABLE: imageStatsTable.tableName
+        IMAGE_STATS_TABLE: imageStatsTable.tableName,
+        REGION: process.env.CDK_DEPLOY_REGION || 'eu-west-1'
       }
     })
+
+    imagesBucket.grantReadWrite(imageProcessorFunction)
 
     imageStatsTable.grantReadWriteData(imageProcessorFunction)
 
