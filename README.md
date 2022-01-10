@@ -29,15 +29,15 @@ This program is developed on top of:
    ```
 6. Validate if everything works by running
    ```sh
-   cdk ls
+   npm run validate
    ```
 7. If this is your first deployment of a cdk stack on your given account run
    ```sh
-   cdk bootstrap
+   npm run bootstrap
    ```
 8. To deploy the stack run
    ```sh
-   cdk deploy
+   npm run deploy
    ```
 9. To destroy the stack on aws run
    ```sh

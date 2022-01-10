@@ -9,6 +9,9 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
+    "validate": "cdk ls",
+    "bootstrap": "cdk bootstrap",
+    "deploy": "cdk deploy",
     "destroy": "cdk destroy",
     "installfunctions:image-processor": "npm ci --prefix functions/imageProcessor",
     "postinstall": "run-p installfunctions:*"
